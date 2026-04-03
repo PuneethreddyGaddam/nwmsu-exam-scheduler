@@ -5,7 +5,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(ellipse at 20% 50%, #1a6b33 0%, #0f3d21 35%, #071a10 100%);
+  background: radial-gradient(ellipse at top left, #00573F, #002b1f);
 }
 
 /* ───────────────────────────────────────────
@@ -335,7 +335,7 @@
 /* right illustration */
 .hero-illustration {
   flex: 0 0 auto;
-  width: min(520px, 48vw);
+  width: min(650px, 55vw);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -345,7 +345,7 @@
 
 .hero-illustration img {
   width: 100%;
-  max-width: 480px;
+  max-width: 600px;
   filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
 }
 

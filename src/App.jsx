@@ -133,26 +133,8 @@ function Hero() {
 
         <div className="hero-actions">
           <button className="btn-primary" id="get-started-btn">GET STARTED</button>
-          <button className="btn-secondary" id="learn-more-btn">
-            <IconPlay />
-            Learn More
-          </button>
         </div>
 
-        <div className="hero-stats">
-          <div className="stat-item">
-            <span className="stat-number">6,500+</span>
-            <span className="stat-label">Enrolled Students</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">300+</span>
-            <span className="stat-label">Courses Tracked</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">100%</span>
-            <span className="stat-label">Free to Use</span>
-          </div>
-        </div>
       </div>
 
       <div className="hero-illustration">
