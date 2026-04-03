@@ -1,5 +1,7 @@
 import './App.css';
-
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import SearchPage from './pages/SearchPage';
+import LetterHover from './components/LetterHover';
 
 // ──────────────────────────────────────────
 // SVG Icons
@@ -18,22 +20,9 @@ const IconSearch = () => (
   </svg>
 );
 
-const IconCalendar = () => (
-  <svg viewBox="0 0 24 24">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
-);
 
-const IconHistory = () => (
-  <svg viewBox="0 0 24 24">
-    <polyline points="1 4 1 10 7 10" />
-    <path d="M3.51 15a9 9 0 1 0 .49-4" />
-    <polyline points="12 7 12 12 16 14" />
-  </svg>
-);
+
+
 
 const IconMail = () => (
   <svg viewBox="0 0 24 24">
@@ -49,20 +38,7 @@ const IconPlay = () => (
   </svg>
 );
 
-// ──────────────────────────────────────────
-// Letter Hover Helper
-// ──────────────────────────────────────────
-function LetterHover({ text }) {
-  return (
-    <span className="letter-hover-group">
-      {text.split('').map((char, i) => (
-        <span key={i} className="letter-hover">
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      ))}
-    </span>
-  );
-}
+
 
 // ──────────────────────────────────────────
 // Navbar
@@ -70,44 +46,36 @@ function LetterHover({ text }) {
 function Navbar() {
   return (
     <nav className="navbar">
-      <a href="/" className="nav-logo">
+      <Link to="/" className="nav-logo">
         <img src="/logo.png" alt="NWMSU Logo" />
-      </a>
+      </Link>
 
       <ul className="nav-links">
         <li>
-          <a href="/" aria-label="Home">
+          <Link to="/" aria-label="Home">
             <IconHome />
             <span className="link-label">Home</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/search" aria-label="Search">
+          <Link to="/search" aria-label="Search">
             <IconSearch />
             <span className="link-label">Search</span>
-          </a>
+          </Link>
         </li>
+
+
         <li>
-          <a href="/calendar" aria-label="Calendar">
-            <IconCalendar />
-            <span className="link-label">Calendar</span>
-          </a>
-        </li>
-        <li>
-          <a href="/history" aria-label="History">
-            <IconHistory />
-            <span className="link-label">History</span>
-          </a>
-        </li>
-        <li>
-          <a href="/contact" aria-label="Contact">
+          <Link to="/contact" aria-label="Contact">
             <IconMail />
             <span className="link-label">Contact</span>
-          </a>
+          </Link>
         </li>
       </ul>
 
-      <button className="nav-cta" id="nav-view-exams-btn">View Exams</button>
+      <Link to="/search">
+        <button className="nav-cta" id="nav-view-exams-btn">View Exams</button>
+      </Link>
     </nav>
   );
 }
@@ -132,7 +100,9 @@ function Hero() {
         </p>
 
         <div className="hero-actions">
-          <button className="btn-primary" id="get-started-btn">GET STARTED</button>
+          <Link to="/search">
+            <button className="btn-primary" id="get-started-btn">GET STARTED</button>
+          </Link>
         </div>
 
       </div>
@@ -149,9 +119,14 @@ function Hero() {
 // ──────────────────────────────────────────
 export default function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <Hero />
-    </div>
+    <BrowserRouter>
+      <div className="app">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
