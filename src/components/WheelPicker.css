@@ -1,0 +1,94 @@
+.wheel-picker-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2a313e;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wheel-picker-label {
+  font-size: 12px;
+  color: var(--white-50);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.wheel-picker-mask {
+  position: relative;
+  width: 140px;
+}
+
+.wheel-picker {
+  height: 120px; /* 3 visible items * 40px */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+.wheel-picker::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gradient fades to mask top and bottom */
+.wheel-picker-mask::before,
+.wheel-picker-mask::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 40px;
+  pointer-events: none;
+  z-index: 2;
+}
+.wheel-picker-mask::before {
+  top: 0;
+  background: linear-gradient(to bottom, #2a313e 10%, transparent);
+}
+.wheel-picker-mask::after {
+  bottom: 0;
+  background: linear-gradient(to top, #2a313e 10%, transparent);
+}
+
+/* Center selection indicator lines */
+.wheel-picker-indicator {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  height: 40px;
+  transform: translateY(-50%);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wheel-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  user-select: none;
+}
+
+.wheel-item.selected {
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.wheel-spacer {
+  height: 40px;
+}
