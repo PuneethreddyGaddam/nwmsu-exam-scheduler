@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as ics from 'ics';
+import { buildICS } from '../utils/buildICS';
 import LetterHover from '../components/LetterHover';
 import WheelPicker from '../components/WheelPicker';
 
@@ -43,28 +43,22 @@ export default function SearchPage() {
   };
 
   const handleExport = () => {
-    const events = exams.map(ex => ({
-      title: ex.title,
-      description: ex.description,
-      start: ex.start,
-      duration: ex.duration,
-      location: ex.location,
-    }));
+    const icsString = buildICS(exams);
+    
+    // Warn mobile users about in-app browsers
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      alert("Note: If you are on a mobile device and want to download the calendar, make sure to open this page in a standard browser (like Safari or Chrome), not an in-app browser like Instagram or Snapchat.");
+    }
 
-    ics.createEvents(events, (error, value) => {
-      if (error) {
-        console.error(error);
-        alert('Failed to generate calendar.');
-        return;
-      }
-      const file = new File([value], 'nwmsu-final-exams.ics', { type: 'text/calendar' });
-      const url = URL.createObjectURL(file);
-      const anchor = document.createElement('a');
-      anchor.href = url;
-      anchor.download = 'nwmsu-final-exams.ics';
-      anchor.click();
-      URL.revokeObjectURL(url);
-    });
+    const blob = new Blob([icsString], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'nwmsu-final-exams.ics';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    URL.revokeObjectURL(url);
   };
 
   const removeExam = (id) => {
