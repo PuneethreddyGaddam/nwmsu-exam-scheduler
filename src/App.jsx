@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import SearchPage from './pages/SearchPage';
+import CalendarPage from './pages/CalendarPage';
 import LetterHover from './components/LetterHover';
 
 // ──────────────────────────────────────────
@@ -20,10 +22,14 @@ const IconSearch = () => (
   </svg>
 );
 
-
-
-
-
+const IconCalendar = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
 const IconMail = () => (
   <svg viewBox="0 0 24 24">
     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -63,8 +69,12 @@ function Navbar() {
             <span className="link-label">Search</span>
           </Link>
         </li>
-
-
+        <li>
+          <Link to="/calendar" aria-label="Calendar">
+            <IconCalendar />
+            <span className="link-label">Calendar</span>
+          </Link>
+        </li>
         <li>
           <Link to="/contact" aria-label="Contact">
             <IconMail />
@@ -73,8 +83,8 @@ function Navbar() {
         </li>
       </ul>
 
-      <Link to="/search">
-        <button className="nav-cta" id="nav-view-exams-btn">View Exams</button>
+      <Link to="/calendar">
+        <button className="nav-cta" id="nav-view-exams-btn">Calendar</button>
       </Link>
     </nav>
   );
@@ -118,13 +128,16 @@ function Hero() {
 // App
 // ──────────────────────────────────────────
 export default function App() {
+  const [exams, setExams] = useState([]);
+
   return (
     <BrowserRouter>
       <div className="app">
         <Navbar />
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/search" element={<SearchPage exams={exams} setExams={setExams} />} />
+          <Route path="/calendar" element={<CalendarPage exams={exams} setExams={setExams} />} />
         </Routes>
       </div>
     </BrowserRouter>

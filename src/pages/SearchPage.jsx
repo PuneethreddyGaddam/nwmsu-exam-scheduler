@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { buildICS } from '../utils/buildICS';
+import { Link } from 'react-router-dom';
 import LetterHover from '../components/LetterHover';
 import WheelPicker from '../components/WheelPicker';
 
@@ -11,11 +11,10 @@ const TIMES = Array.from({length: 24}, (_, i) => {
   return `${h}:00 ${ampm}`;
 });
 
-export default function SearchPage() {
+export default function SearchPage({ exams, setExams }) {
   const [term, setTerm] = useState(TERMS[0]);
   const [day, setDay] = useState(DAYS[0]);
   const [time, setTime] = useState('9:00 AM');
-  const [exams, setExams] = useState([]);
 
   const handleAddClass = (e) => {
     e.preventDefault();
@@ -40,29 +39,6 @@ export default function SearchPage() {
         location: 'TBD'
       }]);
     }
-  };
-
-  const handleExport = () => {
-    const icsString = buildICS(exams);
-    
-    // Warn mobile users about in-app browsers
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      alert("Note: If you are on a mobile device and want to download the calendar, make sure to open this page in a standard browser (like Safari or Chrome), not an in-app browser like Instagram or Snapchat.");
-    }
-
-    const blob = new Blob([icsString], { type: 'text/calendar;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = 'nwmsu-final-exams.ics';
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-    URL.revokeObjectURL(url);
-  };
-
-  const removeExam = (id) => {
-    setExams(exams.filter(ex => ex.id !== id));
   };
 
   return (
@@ -118,43 +94,16 @@ export default function SearchPage() {
 
       </form>
 
-      {/* THE SHOPPING CART / EXAM QUEUE */}
-      {exams.length > 0 && (
-        <div className="exam-queue fade-in">
-          <h2 className="queue-heading">Your Custom Schedule</h2>
-          <div className="exam-list">
-            {exams.map(exam => (
-              <div key={exam.id} className="exam-card">
-                <div className="exam-class-info">
-                  <span className="exam-term">{exam.term}</span>
-                  <span className="exam-meeting">{exam.day}s @ {exam.time}</span>
-                </div>
-                <div className="exam-final-time">
-                  <strong>Final Exam:</strong> {exam.examDate} <br/> {exam.examTime}
-                </div>
-                <button 
-                  onClick={() => removeExam(exam.id)} 
-                  className="exam-remove-btn" 
-                  aria-label="Remove"
-                  title="Remove this class"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <button onClick={handleExport} className="btn-primary" style={{ marginTop: 24, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '18px', fontSize: '15px' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-            EXPORT TO CALENDAR
-          </button>
-        </div>
-      )}
+      {/* GO TO CALENDAR LINK */}
+      <Link to="/calendar" style={{ textDecoration: 'none', display: 'block', marginTop: '40px' }}>
+        <button className="btn-secondary" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', padding: '18px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.4)', color: 'white', fontWeight: 600 }}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+          Go to Calendar {exams.length > 0 ? `(${exams.length})` : ''}
+        </button>
+      </Link>
     </section>
   );
 }
