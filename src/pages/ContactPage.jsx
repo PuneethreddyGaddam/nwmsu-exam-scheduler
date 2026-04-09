@@ -18,7 +18,7 @@ export default function ContactPage() {
     e.preventDefault();
     const { name, subject, message } = formData;
     const body = `Name: ${name}%0D%0AMessage: ${message}`;
-    window.location.href = `mailto:nononsencesmit@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:factsonlyhubsmit@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
