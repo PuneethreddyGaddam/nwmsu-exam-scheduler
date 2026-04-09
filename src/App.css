@@ -569,3 +569,143 @@
     display: none;
   }
 }
+/* ───────────────────────────────────────────
+   CONTACT PAGE
+   ─────────────────────────────────────────── */
+.contact-page {
+  padding: 0 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--nav-height));
+  animation: fadeIn 0.5s ease;
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  width: 100%;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-heading {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(40px, 5vw, 64px);
+  color: var(--white);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.contact-text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--white-80);
+  max-width: 480px;
+}
+
+.contact-icons {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.contact-icon-wrapper {
+  color: #ea580c; /* Matching the orange from user screenshot for icons */
+  transition: transform 0.2s ease;
+}
+
+.contact-icon-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.mail-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.contact-form-container {
+  padding: 0; /* Removing padding since the container is now transparent */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--green-400);
+  box-shadow: 0 0 0 4px rgba(37, 160, 77, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--white-50);
+}
+
+#contact-send-btn {
+  align-self: flex-end;
+  padding: 12px 40px;
+  background: #ea580c;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#contact-send-btn:hover {
+  background: #f97316;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.45);
+}
+
+@media (max-width: 1024px) {
+  .contact-page {
+    padding: 60px 40px;
+  }
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .contact-info {
+    text-align: center;
+    align-items: center;
+  }
+  .contact-text {
+    max-width: 100%;
+  }
+}

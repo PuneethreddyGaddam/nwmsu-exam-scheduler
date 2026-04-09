@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import SearchPage from './pages/SearchPage';
 import CalendarPage from './pages/CalendarPage';
+import ContactPage from './pages/ContactPage';
 import LetterHover from './components/LetterHover';
 
 // ──────────────────────────────────────────
@@ -83,9 +84,9 @@ function Navbar() {
         </li>
       </ul>
 
-      <Link to="/calendar">
-        <button className="nav-cta" id="nav-view-exams-btn">Calendar</button>
-      </Link>
+      <a href="https://www.nwmissouri.edu/registrar/finals.htm" target="_blank" rel="noopener noreferrer">
+        <button className="nav-cta" id="nav-view-exams-btn">VIEW EXAMS</button>
+      </a>
     </nav>
   );
 }
@@ -138,6 +139,7 @@ export default function App() {
           <Route path="/" element={<Hero />} />
           <Route path="/search" element={<SearchPage exams={exams} setExams={setExams} />} />
           <Route path="/calendar" element={<CalendarPage exams={exams} setExams={setExams} />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>
     </BrowserRouter>
