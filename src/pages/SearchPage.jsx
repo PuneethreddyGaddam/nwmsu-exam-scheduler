@@ -33,7 +33,8 @@ export default function SearchPage({ exams, setExams }) {
     setLoading(true);
     try {
       const params = new URLSearchParams({ semester: term, day, time });
-      const res = await fetch(`http://localhost:3000/api/lookup?${params}`);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const res = await fetch(`${API_URL}/api/lookup?${params}`);
       const data = await res.json();
 
       if (!res.ok) {
