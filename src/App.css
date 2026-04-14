@@ -379,7 +379,7 @@
   line-height: 1.1;
   color: var(--white);
   letter-spacing: 0.04em;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
@@ -390,14 +390,14 @@
 .search-text {
   font-size: 17px;
   line-height: 1.6;
-  color: var(--white);
+  color: rgba(255, 255, 255, 0.85); /* Balanced off-white, between silver and bright white */
   margin-bottom: 24px;
   font-weight: 500;
   max-width: 800px;
 }
 
 .search-form {
-  margin-top: 50px;
+  margin-top: 24px;
   width: 100%;
   max-width: 800px;
 }

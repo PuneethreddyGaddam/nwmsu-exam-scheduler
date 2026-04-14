@@ -83,13 +83,11 @@ export default function SearchPage({ exams, setExams }) {
         <LetterHover text="Search" />
       </h1>
       
-      <p className="search-text">
-        Find your exam schedule by entering your regular class meeting time (e.g. MWF 9:00 AM). 
-      </p>
-      
-      <p className="search-text">
-        Additionally, you have the option to search for multiple courses simultaneously. Just separate your search queries with a comma, for example: MWF 9:00 AM, TR 2:00 PM.
-      </p>
+      <div className="search-text" style={{ marginBottom: '16px' }}>
+        <p style={{ fontWeight: 700, marginBottom: '8px' }}>Class Day Mapping:</p>
+        <p style={{ marginBottom: '8px' }}>• <strong>MWF</strong> or <strong>Wednesday-only</strong> classes ➔ Select <strong>Monday</strong></p>
+        <p>• <strong>Tues/Thurs</strong> or <strong>Thursday-only</strong> classes ➔ Select <strong>Tuesday</strong></p>
+      </div>
       
       <p className="search-text">
         To add an exam to your calendar, simply click the button. Once you are done, go to the Calendar section and export your personalized schedule!
@@ -137,7 +135,7 @@ export default function SearchPage({ exams, setExams }) {
       </form>
 
       {/* GO TO CALENDAR LINK */}
-      <Link to="/calendar" style={{ textDecoration: 'none', display: 'block', marginTop: '40px' }}>
+      <Link to="/calendar" style={{ textDecoration: 'none', display: 'block', marginTop: '20px' }}>
         <button className="btn-secondary" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', padding: '18px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.4)', color: 'white', fontWeight: 600 }}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
             <line x1="7" y1="17" x2="17" y2="7" />
