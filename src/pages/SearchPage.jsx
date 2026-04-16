@@ -21,11 +21,16 @@ export default function SearchPage({ exams, setExams }) {
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const fahhhSound = useRef(new Audio('/fahhh.mp3'));
+  const fahhhSound = useRef(null);
 
   const handleAddClass = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+    
+    // Unlocks the audio for the browser to allow playback later
+    if (fahhhSound.current) {
+      fahhhSound.current.load();
+    }
 
     // Prevent adding duplicates
     const exists = exams.find(ex => ex.term === term && ex.day === day && ex.time === time);
@@ -137,6 +142,8 @@ export default function SearchPage({ exams, setExams }) {
         )}
 
       </form>
+
+      <audio ref={fahhhSound} src="/fahhh.mp3" preload="auto" />
 
       {/* GO TO CALENDAR LINK */}
       <Link to="/calendar" style={{ textDecoration: 'none', display: 'block', marginTop: '20px' }}>
