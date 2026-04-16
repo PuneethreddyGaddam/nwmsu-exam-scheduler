@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import LetterHover from '../components/LetterHover';
 import WheelPicker from '../components/WheelPicker';
+import fahhhSoundFile from '../assets/fahhh.mp3';
 
 const TERMS = ['Spring 2026', 'Fall 2026'];
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -149,7 +150,7 @@ export default function SearchPage({ exams, setExams }) {
 
       </form>
 
-      <audio ref={fahhhSound} src="/fahhh.mp3" preload="auto" />
+      <audio ref={fahhhSound} src={fahhhSoundFile} preload="auto" />
 
       {/* GO TO CALENDAR LINK */}
       <Link to="/calendar" style={{ textDecoration: 'none', display: 'block', marginTop: '20px' }}>
