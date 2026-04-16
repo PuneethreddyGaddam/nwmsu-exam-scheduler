@@ -21,6 +21,7 @@ export default function SearchPage({ exams, setExams }) {
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const fahhhSound = new Audio('/fahhh.mp3');
 
   const handleAddClass = async (e) => {
     e.preventDefault();
@@ -39,6 +40,7 @@ export default function SearchPage({ exams, setExams }) {
 
       if (!res.ok) {
         setErrorMsg('No exam block found for that combination. Try a different time.');
+        fahhhSound.play();
         setLoading(false);
         return;
       }
