@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import LetterHover from '../components/LetterHover';
 import WheelPicker from '../components/WheelPicker';
@@ -21,7 +21,7 @@ export default function SearchPage({ exams, setExams }) {
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const fahhhSound = new Audio('/fahhh.mp3');
+  const fahhhSound = useRef(new Audio('/fahhh.mp3'));
 
   const handleAddClass = async (e) => {
     e.preventDefault();
@@ -40,7 +40,8 @@ export default function SearchPage({ exams, setExams }) {
 
       if (!res.ok) {
         setErrorMsg('No exam block found for that combination. Try a different time.');
-        fahhhSound.play();
+        fahhhSound.current.currentTime = 0;
+        fahhhSound.current.play();
         setLoading(false);
         return;
       }
