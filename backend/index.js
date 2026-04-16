@@ -15,11 +15,10 @@ app.get('/api/lookup', async (req, res) => {
       return res.status(400).json({ error: 'Missing required query parameters' });
     }
 
-    // This query finds the closest class_time using EPOCH diff. Great for catching "9:35 AM" -> "9:30 AM" matches
+    // Find exact matching class_time
     const query = `
       SELECT * FROM exam_blocks
-      WHERE term = $1 AND meeting_days = $2
-      ORDER BY ABS(EXTRACT(EPOCH FROM (meeting_time::time - $3::time)))
+      WHERE term = $1 AND meeting_days = $2 AND meeting_time::time = $3::time
       LIMIT 1
     `;
 
