@@ -26,10 +26,16 @@ export default function SearchPage({ exams, setExams }) {
   const handleAddClass = async (e) => {
     e.preventDefault();
     setErrorMsg('');
-    
-    // Unlocks the audio for the browser to allow playback later
+    // Pre-activate/warm up the audio for the browser's security policy
     if (fahhhSound.current) {
-      fahhhSound.current.load();
+      fahhhSound.current.volume = 0;
+      fahhhSound.current.play().then(() => {
+        fahhhSound.current.pause();
+        fahhhSound.current.volume = 1;
+        fahhhSound.current.currentTime = 0;
+      }).catch(() => {
+        // Silent catch for initial interaction block
+      });
     }
 
     // Prevent adding duplicates
