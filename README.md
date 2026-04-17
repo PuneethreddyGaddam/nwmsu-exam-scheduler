@@ -5,7 +5,7 @@ This project is a comprehensive exam scheduler designed for Northwest Missouri S
 ## [Visit The Site](https://examscheduler-five.vercel.app/)
 Feel free to check out the live project here!
 
-![NWMSU Exam Scheduler Banner](./assets/hero.png)
+![NWMSU Exam Scheduler Banner](./public/image.png)
 
 ## Features
 - **PostgreSQL Database**: Stores detailed information about exams, including semesters, meeting days, class times, exam dates, and seat locations.
